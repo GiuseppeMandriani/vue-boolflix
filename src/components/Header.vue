@@ -16,16 +16,32 @@
             </ul> -->
         </div>
         <div class="nav-right">
-            <div class="searchBox">
-                <form>
+            <form>
+                <div class="nav-right-content">
                     <div>
                         <input
                             type="text"
                             placeholder="Search your title here..."
+                            v-model.trim="searchText"
+                            :search="searchText"
                         />
                     </div>
-                </form>
-            </div>
+
+                    <div class="btn">
+                        <button
+                            type="submit"
+                            @click.prevent="searchFilm(searchText)"
+                        >
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="btn">
+                        <button type="reset" @click="resetSearch">
+                            <i class="fas fa-backspace"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </header>
 </template>
@@ -33,6 +49,21 @@
 <script>
 export default {
     name: 'Headers',
+    data() {
+        return {
+            searchText: '',
+        };
+    },
+    methods: {
+        searchFilm(text) {
+            this.searchText = text;
+            console.log(this.searchText);
+        },
+        resetSearch() {
+            this.searchText = '';
+            this.searchFilm(this.searchText);
+        },
+    },
 };
 </script>
 
@@ -46,5 +77,9 @@ export default {
 // Brand Logo
 .nav-left img {
     width: 180px;
+}
+
+.nav-right-content {
+    display: flex;
 }
 </style>
