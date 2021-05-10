@@ -1,6 +1,9 @@
 <template>
     <section class="top-jumbo container">
         <h2>Results</h2>
+        <div class="box-search">
+            <Search @performSearch="getFilmList" />
+        </div>
 
         <ul>
             <li v-for="(film, index) in filteredFilmList" :key="index">
@@ -17,16 +20,17 @@
 
 <script>
 import axios from 'axios';
+import Search from '@/components/Search.vue';
 export default {
     name: 'Top-Jumbo',
-    props: {
-        search: String,
+    components: {
+        Search,
     },
     data() {
         return {
-            urlAPI:
-                'https://api.themoviedb.org/3/search/movie?api_key=ad7cef1cdf8a5fcf4e73a44c4f9e4bba&query&language=it-IT', // API
+            urlAPI: 'https://api.themoviedb.org/3/search/movie', // API
             filmList: [], // Array che ospiterà API
+            search: '',
             //
         };
     },
@@ -35,25 +39,22 @@ export default {
             if (this.search === '') {
                 return this.filmList;
             }
-            return this.filmList.filter(item => {
-                return item.original_title
+            return this.filmList.filter(title => {
+                return title.title
                     .toLowerCase()
                     .includes(this.search.toLowerCase());
             });
         },
     },
 
-    created() {
-        this.getFilmList();
-    },
-
     methods: {
-        getFilmList() {
+        getFilmList(element) {
             // API CALL
             axios
                 .get(this.urlAPI, {
                     params: {
-                        query: this.search,
+                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                        query: element,
                     },
                 })
                 .then(res => {
