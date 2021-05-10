@@ -9,5 +9,14 @@
 }
 
 body {
+    height: 100%;
     font-family: $main-font;
+}
+
+// UTILITIES
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
