@@ -1,13 +1,24 @@
 <template>
     <div id="app">
-        <h1>MY APP HERE</h1>
+        <!-- HEADER -->
+        <Header />
+
+        <!-- MAIN -->
+        <main>
+            <TopJumbo />
+        </main>
     </div>
 </template>
 
 <script>
+import Header from '@/components/Header';
+import TopJumbo from '@/components/TopJumbo';
 export default {
     name: 'App',
-    components: {},
+    components: {
+        Header,
+        TopJumbo,
+    },
 };
 </script>
 
