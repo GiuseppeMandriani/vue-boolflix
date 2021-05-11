@@ -25,7 +25,7 @@
                 >
                     <i class="fas fa-search"></i>
                 </button>
-                <button class="btn-reset" type="reset" @click="resetSearch">
+                <button class="btn-reset" type="reset">
                     <i class="fas fa-backspace"></i>
                 </button>
             </form>
@@ -41,11 +41,17 @@ export default {
             searchText: '',
         };
     },
-    methods: {
-        resetSearch() {
-            this.searchText = '';
-            this.$emit('performSearch', this.searchText);
-        },
+    computed: {
+        // filterMovies() {
+        //     if (this.searchText === '') {
+        //         return this.filmList;
+        //     }
+        //     return this.filmList.filter(element => {
+        //         return element.title
+        //             .toLowerCase()
+        //             .includes(this.searchinMovies);
+        //     });
+        // },
     },
 };
 </script>

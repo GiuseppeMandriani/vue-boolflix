@@ -23,47 +23,85 @@ export default {
         return {
             urlApiFilm: 'https://api.themoviedb.org/3/search/movie',
             urlApiSeries: 'https://api.themoviedb.org/3/search/tv',
+            urlApiPopular: 'https://api.themoviedb.org/3/movie/popular',
             filmList: [], // Arr per contenere API film
             seriesList: [], // Arr per contenere API series
         };
+    },
+    created() {
+        // CALL API POPULAR
+        axios
+            .get(this.urlApiPopular, {
+                params: {
+                    api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+
+                    language: 'it-IT',
+                },
+            })
+            .then(res => {
+                console.log(res.data.results);
+                this.filmList = res.data.results;
+            })
+            .catch(err => {
+                console.log('Errore', err);
+            });
     },
 
     methods: {
         getFilmList(element) {
             // CALL API FILM
-            axios
-                .get(this.urlApiFilm, {
-                    params: {
-                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
-                        query: element,
-                        language: 'it-IT',
-                    },
-                })
-                .then(res => {
-                    console.log(res.data.results);
-                    this.filmList = res.data.results;
-                })
-                .catch(err => {
-                    console.log('Errore', err);
-                });
+            if (element === '') {
+                // CALL API POPULAR
+                axios
+                    .get(this.urlApiPopular, {
+                        params: {
+                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
 
-            // CALL API SERIES
+                            language: 'it-IT',
+                        },
+                    })
+                    .then(res => {
+                        console.log(res.data.results);
+                        this.filmList = res.data.results;
+                    })
+                    .catch(err => {
+                        console.log('Errore', err);
+                    });
+            } else {
+                axios
+                    .get(this.urlApiFilm, {
+                        params: {
+                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                            query: element,
+                            language: 'it-IT',
+                        },
+                    })
+                    .then(res => {
+                        console.log(res.data.results);
+                        this.filmList = res.data.results;
+                    })
+                    .catch(err => {
+                        console.log('Errore', err);
+                    });
 
-            axios
-                .get(this.urlApiSeries, {
-                    params: {
-                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
-                        query: element,
-                        language: 'it-IT',
-                    },
-                })
-                .then(res => {
-                    console.log(res.data.results);
-                    this.seriesList = res.data.results;
-                })
-                .catch(err => {
-                    console.log('Errore', err);
-                });
+                // CALL API SERIES
+
+                axios
+                    .get(this.urlApiSeries, {
+                        params: {
+                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                            query: element,
+                            language: 'it-IT',
+                        },
+                    })
+                    .then(res => {
+                        console.log(res.data.results);
+                        this.seriesList = res.data.results;
+                    })
+                    .catch(err => {
+                        console.log('Errore', err);
+                    });
+            }
         },
     },
 };

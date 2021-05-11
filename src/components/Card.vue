@@ -34,9 +34,9 @@
                 >
                     <i class="fas fa-star"></i> </span
                 ><span
-                    v-for="(stars, i) in 5 -
+                    v-for="(stars, index) in 5 -
                         Math.round(details.vote_average / 2)"
-                    :key="i"
+                    :key="'A' + index"
                     ><i class="far fa-star"></i>
                 </span>
             </li>
