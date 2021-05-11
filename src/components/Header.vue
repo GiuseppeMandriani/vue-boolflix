@@ -17,6 +17,7 @@
                     type="text"
                     placeholder="Search your film/serie Tv here ..."
                     v-model.trim="searchText"
+                    @keyup="$emit('performSearch', searchText)"
                 />
                 <button
                     class="btn-search"
