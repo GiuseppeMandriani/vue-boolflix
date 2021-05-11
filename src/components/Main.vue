@@ -1,17 +1,20 @@
 <template>
     <section>
-        <ul v-for="(film, index) in movies" :key="index">
-            <li>{{ film.title }}</li>
-            <li>{{ film.original_title }}</li>
-            <li>{{ film.original_language }}</li>
-            <li>{{ film.vote_average }}</li>
+        <ul>
+            <li v-for="(film, index) in movies" :key="index" :details="film">
+                <Card :details="film" />
+            </li>
         </ul>
     </section>
 </template>
 
 <script>
+import Card from '@/components/Card.vue';
 export default {
     name: 'Main',
+    components: {
+        Card,
+    },
     props: {
         movies: Array,
     },
