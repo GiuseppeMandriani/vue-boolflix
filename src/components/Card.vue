@@ -3,7 +3,15 @@
         <ul class="list">
             <li>{{ details.title }}</li>
             <li>{{ details.original_title }}</li>
-            <li>{{ details.original_language }}</li>
+            <li v-if="!flags.includes(details.original_language)">
+                {{ details.original_language }}
+            </li>
+            <li v-else>
+                <img
+                    :src="require(`../assets/${details.original_language}.png`)"
+                    alt=""
+                />
+            </li>
             <li>{{ details.vote_average }}</li>
         </ul>
     </div>
@@ -15,6 +23,11 @@ export default {
     props: {
         details: Object,
     },
+    data() {
+        return {
+            flags: ['it', 'en'],
+        };
+    },
 };
 </script>
 
@@ -22,5 +35,9 @@ export default {
 .item {
     flex-basis: calc(100% / 5 - 2rem);
     margin: 1rem 1rem;
+}
+
+.list img {
+    width: 25px;
 }
 </style>
