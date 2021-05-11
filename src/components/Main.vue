@@ -11,9 +11,7 @@ export default {
     components: {
         Card,
     },
-    props: {
-        movies: Array,
-    },
+    props: ['movies'],
 };
 </script>
 

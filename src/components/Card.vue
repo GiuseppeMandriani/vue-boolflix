@@ -1,8 +1,17 @@
 <template>
     <div class="item">
         <ul class="list">
-            <li>{{ details.title }}</li>
-            <li>{{ details.original_title }}</li>
+            <li>
+                Titolo:
+                {{ details.title == null ? details.name : details.title }}
+            </li>
+            <li>
+                {{
+                    details.original_title == null
+                        ? details.original_name
+                        : details.original_title
+                }}
+            </li>
             <li v-if="!flags.includes(details.original_language)">
                 {{ details.original_language }}
             </li>

@@ -25,6 +25,9 @@
                 >
                     <i class="fas fa-search"></i>
                 </button>
+                <button class="btn-reset" type="reset" @click="resetSearch">
+                    <i class="fas fa-backspace"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -38,16 +41,10 @@ export default {
             searchText: '',
         };
     },
-    computed: {
-        filterMovies() {
-            if (this.searchText === '') {
-                return this.filmList;
-            }
-            return this.filmList.filter(element => {
-                return element.title
-                    .toLowerCase()
-                    .includes(this.searchinMovies);
-            });
+    methods: {
+        resetSearch() {
+            this.searchText = '';
+            this.$emit('performSearch', this.searchText);
         },
     },
 };
@@ -75,7 +72,8 @@ export default {
             border: 1px solid #ccc;
         }
     }
-    button.btn-search {
+    button.btn-search,
+    button.btn-reset {
         padding: 10px;
         background: transparent;
         border: none;

@@ -4,7 +4,7 @@
         <Header @performSearch="getFilmList" />
 
         <!-- MAIN -->
-        <Main :movies="filmList" />
+        <Main :movies="filmList.concat(seriesList)" />
     </div>
 </template>
 
@@ -21,17 +21,18 @@ export default {
 
     data() {
         return {
-            urlApi: 'https://api.themoviedb.org/3/search/movie',
-            filmList: [], // Arr per contenere API
-            searchinMovies: '',
+            urlApiFilm: 'https://api.themoviedb.org/3/search/movie',
+            urlApiSeries: 'https://api.themoviedb.org/3/search/tv',
+            filmList: [], // Arr per contenere API film
+            seriesList: [], // Arr per contenere API series
         };
     },
 
     methods: {
         getFilmList(element) {
-            // CALL
+            // CALL API FILM
             axios
-                .get(this.urlApi, {
+                .get(this.urlApiFilm, {
                     params: {
                         api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
                         query: element,
@@ -45,10 +46,24 @@ export default {
                 .catch(err => {
                     console.log('Errore', err);
                 });
-        },
 
-        searchElement(text) {
-            this.searchinMovies = text;
+            // CALL API SERIES
+
+            axios
+                .get(this.urlApiSeries, {
+                    params: {
+                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                        query: element,
+                        language: 'it-IT',
+                    },
+                })
+                .then(res => {
+                    console.log(res.data.results);
+                    this.seriesList = res.data.results;
+                })
+                .catch(err => {
+                    console.log('Errore', err);
+                });
         },
     },
 };
