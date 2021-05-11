@@ -1,6 +1,6 @@
 <template>
     <!-- Logo -->
-    <div class="header">
+    <div class="header container">
         <div class="nav-left">
             <div class="logo">
                 <a href="https://fontmeme.com/netflix-font/"
@@ -12,17 +12,18 @@
             </div>
         </div>
         <div class="nav-right">
-            <form action="">
+            <form>
                 <input
                     type="text"
-                    placeholder="Search"
+                    placeholder="Search your film/serie Tv here ..."
                     v-model.trim="searchText"
                 />
                 <button
+                    class="btn-search"
                     type="submit"
                     @click.prevent="$emit('performSearch', searchText)"
                 >
-                    Search
+                    <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
@@ -54,11 +55,32 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-    padding: 20px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     img {
         width: 200px;
+    }
+}
+
+.nav-right {
+    input {
+        width: 250px;
+        padding: 10px;
+        margin-right: 1rem;
+        outline: none;
+        border: none;
+        &:focus {
+            border: 1px solid #ccc;
+        }
+    }
+    button.btn-search {
+        padding: 10px;
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
     }
 }
 </style>

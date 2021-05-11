@@ -1,10 +1,6 @@
 <template>
-    <section>
-        <ul>
-            <li v-for="(film, index) in movies" :key="index" :details="film">
-                <Card :details="film" />
-            </li>
-        </ul>
+    <section class="top-jumbo container">
+        <Card v-for="(film, index) in movies" :key="index" :details="film" />
     </section>
 </template>
 
@@ -22,7 +18,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul {
-    padding: 20px;
+.top-jumbo {
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>
