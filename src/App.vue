@@ -30,44 +30,18 @@ export default {
     },
     created() {
         // CALL API POPULAR
-        axios
-            .get(this.urlApiPopular, {
-                params: {
-                    api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
 
-                    language: 'it-IT',
-                },
-            })
-            .then(res => {
-                console.log(res.data.results);
-                this.filmList = res.data.results;
-            })
-            .catch(err => {
-                console.log('Errore', err);
-            });
+        this.getPopular();
     },
 
     methods: {
         getFilmList(element) {
-            // CALL API FILM
             if (element === '') {
                 // CALL API POPULAR
-                axios
-                    .get(this.urlApiPopular, {
-                        params: {
-                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
 
-                            language: 'it-IT',
-                        },
-                    })
-                    .then(res => {
-                        console.log(res.data.results);
-                        this.filmList = res.data.results;
-                    })
-                    .catch(err => {
-                        console.log('Errore', err);
-                    });
+                this.getPopular();
             } else {
+                // CALL API FILM
                 axios
                     .get(this.urlApiFilm, {
                         params: {
@@ -102,6 +76,24 @@ export default {
                         console.log('Errore', err);
                     });
             }
+        },
+
+        getPopular() {
+            // CALL API POPULAR
+            axios
+                .get(this.urlApiPopular, {
+                    params: {
+                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                        language: 'it-IT',
+                    },
+                })
+                .then(res => {
+                    console.log(res.data.results);
+                    this.filmList = res.data.results;
+                })
+                .catch(err => {
+                    console.log('Errore', err);
+                });
         },
     },
 };
