@@ -19,6 +19,7 @@
                     v-model.trim="searchText"
                     @keyup="$emit('performSearch', searchText)"
                 />
+                <!-- Capire limite chiamate API -->
                 <button
                     class="btn-search"
                     type="submit"
