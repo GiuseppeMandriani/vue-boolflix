@@ -5,24 +5,23 @@
             :alt="`Img of ${details.name} not found`"
         />
         <ul class="list">
-            <li v-show="details.title !== details.original_title">
-                {{ details.title == null ? details.name : details.title }}
-            </li>
-            <li>
-                {{
-                    details.original_title == null
-                        ? details.original_name
-                        : details.original_title
-                }}
-            </li>
-            <li v-if="!flags.includes(details.original_language)">
-                {{ details.original_language }}
+            <li v-if="details.title === details.name">
+                {{ details.title ? details.title : details.name }}
             </li>
             <li v-else>
+                {{
+                    details.original_title
+                        ? details.original_title
+                        : details.original_name
+                }}
+            </li>
+            <li>
                 <img
-                    :src="require(`../assets/${details.original_language}.png`)"
-                    alt=""
+                    v-if="isFlag(details.original_language)"
+                    :src="require(`@/assets/${details.original_language}.png`)"
+                    :alt="details.original_language"
                 />
+                <span v-else>{{ details.original_language }}</span>
             </li>
             <li>
                 <span
@@ -54,19 +53,21 @@ export default {
             flags: ['it', 'en'],
         };
     },
+    methods: {
+        isFlag(language) {
+            return this.flags.includes(language);
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
 .item {
-    flex-basis: calc(100% / 7 - 2rem);
+    flex-basis: calc(100% / 5 - 2rem);
     margin: 1rem 1rem;
-    img {
-        max-width: 100%;
-    }
 }
 
-.list img {
-    width: 25px;
+li img {
+    width: 32px;
 }
 </style>

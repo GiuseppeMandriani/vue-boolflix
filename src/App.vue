@@ -1,22 +1,26 @@
 <template>
     <div id="app">
-        <div v-if="!loading">
+        <div>
             <!-- HEADER -->
-            <Header @performSearch="getFilmList" @deleteAll="getPopular" />
+            <Header @performSearch="getData" />
 
             <!-- MAIN -->
             <Jumbotron />
-            <Main :movies="filmList.concat(seriesList)" />
+            <Content
+                :movies="filmList"
+                :series="seriesList"
+                :popular="popularList"
+            />
         </div>
+        <Loader />
 
-        <Loader v-else label="Caricamento...">
+        <!-- <Loader v-else label="Caricamento...">
             <img
                 src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
                 alt="netflix-font"
                 border="0"
             />
-        </Loader>
-        <NotFound v-show="nessunRisultato" />
+        </Loader> -->
     </div>
 </template>
 
@@ -24,101 +28,86 @@
 import axios from 'axios';
 import Header from '@/components/Header.vue';
 import Jumbotron from '@/components/Jumbotron.vue';
-import Main from '@/components/Main.vue';
+import Content from '@/components/Content.vue';
 import Loader from '@/components/Loader.vue';
-import NotFound from '@/components/NotFound.vue';
+
 export default {
     name: 'App',
     components: {
         Header,
         Jumbotron,
-        Main,
+        Content,
         Loader,
-        NotFound,
     },
 
     data() {
         return {
-            urlApiFilm: 'https://api.themoviedb.org/3/search/movie',
-            urlApiSeries: 'https://api.themoviedb.org/3/search/tv',
-            urlApiPopular: 'https://api.themoviedb.org/3/movie/popular',
             filmList: [], // Arr per contenere API film
             seriesList: [], // Arr per contenere API series
+            popularList: [],
+            urlApi: 'https://api.themoviedb.org/3/search/',
+            urlApiPopular: 'https://api.themoviedb.org/3/movie/popular',
+            apiKey: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
             loading: true,
-            nessunRisultato: [],
         };
-    },
-    created() {
-        // CALL API POPULAR
-        setTimeout(() => {
-            this.getPopular();
-        }, 2000);
     },
 
     methods: {
-        getFilmList(element) {
-            if (element === '') {
-                // CALL API POPULAR
+        getData(searchText) {
+            console.log(searchText);
+            if (searchText !== '') {
+                const apiParams = {
+                    api_key: this.apiKey,
+                    query: searchText,
+                    language: 'it-IT',
+                };
 
-                this.getPopular();
-            } else {
-                // CALL API FILM
+                // Call API Movies
                 axios
-                    .get(this.urlApiFilm, {
-                        params: {
-                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
-                            query: element,
-                            language: 'it-IT',
-                        },
+                    .get(this.urlApi + 'movie', {
+                        params: apiParams,
                     })
                     .then(res => {
-                        console.log('Nessun risultato', res.data.results);
-                        this.nessunRisultato = res.data.results;
                         this.filmList = res.data.results;
-                        this.loading = false;
-                    })
-                    .catch(err => {
-                        console.log('Errore', err);
+                        this.loading = true;
                     });
 
-                // CALL API SERIES
-
+                // Call API Series
                 axios
-                    .get(this.urlApiSeries, {
-                        params: {
-                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
-                            query: element,
-                            language: 'it-IT',
-                        },
+                    .get(this.urlApi + 'tv', {
+                        params: apiParams,
                     })
                     .then(res => {
-                        console.log(res.data.results);
                         this.seriesList = res.data.results;
-                        this.loading = false;
-                    })
-                    .catch(err => {
-                        console.log('Errore', err);
+                        this.loading = true;
                     });
+            } else {
+                this.filmList = [];
+                this.seriesList = [];
+                this.popularList = [];
             }
         },
 
         getPopular() {
             // CALL API POPULAR
-            axios
-                .get(this.urlApiPopular, {
-                    params: {
-                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
-                        language: 'it-IT',
-                    },
-                })
-                .then(res => {
-                    console.log(res.data.results);
-                    this.filmList = res.data.results;
-                    this.loading = false;
-                })
-                .catch(err => {
-                    console.log('Errore', err);
-                });
+            setTimeout(() => {
+                axios
+                    .get(this.urlApiPopular, {
+                        params: {
+                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                            language: 'it-IT',
+                        },
+                    })
+
+                    .then(res => {
+                        console.log(res.data.results);
+                        this.popularList = res.data.results;
+                        this.loading = false;
+                    })
+                    .catch(err => {
+                        console.log('Errore', err);
+                    });
+            }, 2000);
         },
     },
 };

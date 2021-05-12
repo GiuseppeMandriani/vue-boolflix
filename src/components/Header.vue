@@ -15,9 +15,8 @@
             <form>
                 <input
                     type="text"
-                    placeholder="Search your film/serie Tv here ..."
+                    placeholder="Search your film/Serie Tv here ..."
                     v-model.trim="searchText"
-                    @keyup="$emit('performSearch', searchText)"
                 />
                 <!-- Capire limite chiamate API -->
                 <button
@@ -27,11 +26,7 @@
                 >
                     <i class="fas fa-search"></i>
                 </button>
-                <button
-                    class="btn-reset"
-                    type="reset"
-                    @click="$emit('deleteAll', searchText)"
-                >
+                <button class="btn-reset" type="reset">
                     <i class="fas fa-backspace"></i>
                 </button>
             </form>
@@ -46,18 +41,6 @@ export default {
         return {
             searchText: '',
         };
-    },
-    computed: {
-        // filterMovies() {
-        //     if (this.searchText === '') {
-        //         return this.filmList;
-        //     }
-        //     return this.filmList.filter(element => {
-        //         return element.title
-        //             .toLowerCase()
-        //             .includes(this.searchinMovies);
-        //     });
-        // },
     },
 };
 </script>
