@@ -14,12 +14,15 @@
         <div class="nav-right">
             <form>
                 <input
+                    class="text"
+                    :class="{ in: iconStatus, out: iconStatus == false }"
                     type="text"
                     placeholder="Search your film/Serie Tv here ..."
                     v-model.trim="searchText"
                 />
                 <!-- Capire limite chiamate API -->
                 <button
+                    @click="clickSearch"
                     class="btn-search"
                     type="submit"
                     @click.prevent="$emit('performSearch', searchText)"
@@ -40,7 +43,13 @@ export default {
     data() {
         return {
             searchText: '',
+            iconStatus: undefined,
         };
+    },
+    methods: {
+        clickSearch() {
+            this.iconStatus = !this.iconStatus;
+        },
     },
 };
 </script>
@@ -57,7 +66,7 @@ export default {
 }
 
 .nav-right {
-    input {
+    /* input {
         width: 250px;
         padding: 10px;
         margin-right: 1rem;
@@ -66,7 +75,7 @@ export default {
         &:focus {
             border: 1px solid #ccc;
         }
-    }
+    } */
     button.btn-search,
     button.btn-reset {
         padding: 10px;
@@ -74,6 +83,38 @@ export default {
         border: none;
         font-size: 1.2rem;
         cursor: pointer;
+    }
+}
+.text {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    height: 30px;
+    width: 0px;
+    color: #000;
+}
+.text.in {
+    animation: search-in 1s forwards;
+}
+.text.out {
+    animation: search-out 1s forwards;
+}
+@keyframes search-in {
+    0% {
+        width: 0px;
+    }
+    100% {
+        width: 200px;
+        padding: 5px 10px;
+    }
+}
+@keyframes search-out {
+    0% {
+        width: 200px;
+        padding: 5px 10px;
+    }
+    100% {
+        width: 0px;
     }
 }
 </style>
