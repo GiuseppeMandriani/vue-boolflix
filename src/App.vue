@@ -51,9 +51,9 @@ export default {
             loading: true,
             notFoundMovies: false,
             notFoundSeries: false,
-            loaderMovies: true,
-            loaderSeries: true,
-            loaderPopular: true,
+            loaderMovies: false,
+            loaderSeries: false,
+            loaderPopular: false,
         };
     },
 
@@ -82,7 +82,7 @@ export default {
                     .then(res => {
                         this.filmList = res.data.results;
                         this.notFoundMovies = this.filmList.length === 0;
-                        this.loaderMovies = false;
+                        this.loaderMovies = true;
                     });
 
                 // Call API Series
@@ -93,7 +93,7 @@ export default {
                     .then(res => {
                         this.seriesList = res.data.results;
                         this.notFoundSeries = this.seriesList.length === 0;
-                        this.loaderSeries = false;
+                        this.loaderSeries = true;
                     });
             } else {
                 this.filmList = [];
@@ -117,7 +117,7 @@ export default {
                     console.log(res.data.results);
                     this.popularList = res.data.results;
                     this.loading = false;
-                    this.loaderPopular = false;
+                    this.loaderPopular = true;
                 })
                 .catch(err => {
                     console.log('Errore', err);

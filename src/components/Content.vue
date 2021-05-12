@@ -1,12 +1,6 @@
 <template>
     <div class="container top-jumbo">
-        <section v-show="notFoundError" class="notfound">
-            <img
-                class="notfound"
-                :src="require(`@/assets/404.gif`)"
-                alt="not found"
-            />
-        </section>
+        <ElementNotFound v-show="notFoundError" />
         <section v-show="movies.length" class="list">
             <h2>Movies</h2>
             <div class="flex">
@@ -33,7 +27,7 @@
                 />
             </div>
         </section>
-        <section v-show="loader">
+        <section v-show="!loader">
             <Loader label="Caricamento...">
                 <img
                     src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
@@ -48,12 +42,14 @@
 <script>
 import Card from '@/components/Card.vue';
 import Loader from '@/components/Loader.vue';
+import ElementNotFound from '@/components/ElementNotFound.vue';
 
 export default {
     name: 'Content',
     components: {
         Card,
         Loader,
+        ElementNotFound,
     },
     props: {
         movies: Array,
@@ -69,11 +65,5 @@ export default {
 .flex {
     display: flex;
     flex-wrap: wrap;
-}
-.notfound {
-    text-align: center;
-    img {
-        width: 200px;
-    }
 }
 </style>
