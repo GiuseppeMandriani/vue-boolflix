@@ -4,7 +4,7 @@
         <div v-if="!loading">
             <Header @performSearch="getData" />
             <!-- MAIN -->
-            <Jumbotron />
+            <Jumbotron :popular="popularList" :indexImg="indexImg" />
             <Content
                 :movies="filmList"
                 :series="seriesList"
@@ -54,6 +54,7 @@ export default {
             loaderMovies: false,
             loaderSeries: false,
             loaderPopular: false,
+            indexImg: 0,
         };
     },
 
