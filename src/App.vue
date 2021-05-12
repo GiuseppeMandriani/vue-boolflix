@@ -2,7 +2,7 @@
     <div id="app">
         <div v-if="!loading">
             <!-- HEADER -->
-            <Header @performSearch="getFilmList" />
+            <Header @performSearch="getFilmList" @deleteAll="getPopular" />
 
             <!-- MAIN -->
             <Jumbotron />

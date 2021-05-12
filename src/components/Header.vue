@@ -27,7 +27,11 @@
                 >
                     <i class="fas fa-search"></i>
                 </button>
-                <button class="btn-reset" type="reset">
+                <button
+                    class="btn-reset"
+                    type="reset"
+                    @click="$emit('deleteAll', searchText)"
+                >
                     <i class="fas fa-backspace"></i>
                 </button>
             </form>
