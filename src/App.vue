@@ -1,26 +1,26 @@
 <template>
     <div id="app">
-        <div>
-            <!-- HEADER -->
+        <!-- HEADER -->
+        <div v-if="!loading">
             <Header @performSearch="getData" />
-
             <!-- MAIN -->
             <Jumbotron />
             <Content
                 :movies="filmList"
                 :series="seriesList"
                 :popular="popularList"
+                :notFoundError="notFoundMovies && notFoundSeries"
+                :loader="loaderMovies || loaderSeries || loaderPopular"
             />
         </div>
-        <Loader />
 
-        <!-- <Loader v-else label="Caricamento...">
+        <Loader v-else label="Caricamento...">
             <img
                 src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
                 alt="netflix-font"
                 border="0"
             />
-        </Loader> -->
+        </Loader>
     </div>
 </template>
 
@@ -49,7 +49,19 @@ export default {
             urlApiPopular: 'https://api.themoviedb.org/3/movie/popular',
             apiKey: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
             loading: true,
+            notFoundMovies: false,
+            notFoundSeries: false,
+            loaderMovies: true,
+            loaderSeries: true,
+            loaderPopular: true,
         };
+    },
+
+    created() {
+        // CALL API POPULAR
+        setTimeout(() => {
+            this.getPopular();
+        }, 2000);
     },
 
     methods: {
@@ -69,7 +81,8 @@ export default {
                     })
                     .then(res => {
                         this.filmList = res.data.results;
-                        this.loading = true;
+                        this.notFoundMovies = this.filmList.length === 0;
+                        this.loaderMovies = false;
                     });
 
                 // Call API Series
@@ -79,35 +92,36 @@ export default {
                     })
                     .then(res => {
                         this.seriesList = res.data.results;
-                        this.loading = true;
+                        this.notFoundSeries = this.seriesList.length === 0;
+                        this.loaderSeries = false;
                     });
             } else {
                 this.filmList = [];
                 this.seriesList = [];
-                this.popularList = [];
+                this.getPopular();
             }
         },
 
         getPopular() {
             // CALL API POPULAR
-            setTimeout(() => {
-                axios
-                    .get(this.urlApiPopular, {
-                        params: {
-                            api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
-                            language: 'it-IT',
-                        },
-                    })
 
-                    .then(res => {
-                        console.log(res.data.results);
-                        this.popularList = res.data.results;
-                        this.loading = false;
-                    })
-                    .catch(err => {
-                        console.log('Errore', err);
-                    });
-            }, 2000);
+            axios
+                .get(this.urlApiPopular, {
+                    params: {
+                        api_key: 'ad7cef1cdf8a5fcf4e73a44c4f9e4bba',
+                        language: 'it-IT',
+                    },
+                })
+
+                .then(res => {
+                    console.log(res.data.results);
+                    this.popularList = res.data.results;
+                    this.loading = false;
+                    this.loaderPopular = false;
+                })
+                .catch(err => {
+                    console.log('Errore', err);
+                });
         },
     },
 };
