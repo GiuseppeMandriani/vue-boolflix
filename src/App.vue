@@ -1,22 +1,37 @@
 <template>
     <div id="app">
-        <!-- HEADER -->
-        <Header @performSearch="getFilmList" />
+        <div v-if="!loading">
+            <!-- HEADER -->
+            <Header @performSearch="getFilmList" />
 
-        <!-- MAIN -->
-        <Main :movies="filmList.concat(seriesList)" />
+            <!-- MAIN -->
+            <Jumbotron />
+            <Main :movies="filmList.concat(seriesList)" />
+        </div>
+
+        <Loader v-else label="Caricamento...">
+            <img
+                src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
+                alt="netflix-font"
+                border="0"
+            />
+        </Loader>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
 import Header from '@/components/Header.vue';
+import Jumbotron from '@/components/Jumbotron.vue';
 import Main from '@/components/Main.vue';
+import Loader from '@/components/Loader.vue';
 export default {
     name: 'App',
     components: {
         Header,
+        Jumbotron,
         Main,
+        Loader,
     },
 
     data() {
@@ -26,12 +41,14 @@ export default {
             urlApiPopular: 'https://api.themoviedb.org/3/movie/popular',
             filmList: [], // Arr per contenere API film
             seriesList: [], // Arr per contenere API series
+            loading: true,
         };
     },
     created() {
         // CALL API POPULAR
-
-        this.getPopular();
+        setTimeout(() => {
+            this.getPopular();
+        }, 2000);
     },
 
     methods: {
@@ -53,6 +70,7 @@ export default {
                     .then(res => {
                         console.log(res.data.results);
                         this.filmList = res.data.results;
+                        this.loading = false;
                     })
                     .catch(err => {
                         console.log('Errore', err);
@@ -71,6 +89,7 @@ export default {
                     .then(res => {
                         console.log(res.data.results);
                         this.seriesList = res.data.results;
+                        this.loading = false;
                     })
                     .catch(err => {
                         console.log('Errore', err);
@@ -90,6 +109,7 @@ export default {
                 .then(res => {
                     console.log(res.data.results);
                     this.filmList = res.data.results;
+                    this.loading = false;
                 })
                 .catch(err => {
                     console.log('Errore', err);
