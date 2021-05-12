@@ -16,6 +16,7 @@
                 border="0"
             />
         </Loader>
+        <NotFound v-show="nessunRisultato" />
     </div>
 </template>
 
@@ -25,6 +26,7 @@ import Header from '@/components/Header.vue';
 import Jumbotron from '@/components/Jumbotron.vue';
 import Main from '@/components/Main.vue';
 import Loader from '@/components/Loader.vue';
+import NotFound from '@/components/NotFound.vue';
 export default {
     name: 'App',
     components: {
@@ -32,6 +34,7 @@ export default {
         Jumbotron,
         Main,
         Loader,
+        NotFound,
     },
 
     data() {
@@ -42,6 +45,7 @@ export default {
             filmList: [], // Arr per contenere API film
             seriesList: [], // Arr per contenere API series
             loading: true,
+            nessunRisultato: [],
         };
     },
     created() {
@@ -68,7 +72,8 @@ export default {
                         },
                     })
                     .then(res => {
-                        console.log(res.data.results);
+                        console.log('Nessun risultato', res.data.results);
+                        this.nessunRisultato = res.data.results;
                         this.filmList = res.data.results;
                         this.loading = false;
                     })

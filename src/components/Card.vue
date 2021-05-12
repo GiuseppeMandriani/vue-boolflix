@@ -5,8 +5,7 @@
             :alt="`Img of ${details.name} not found`"
         />
         <ul class="list">
-            <li>
-                Titolo:
+            <li v-show="details.title !== details.original_title">
                 {{ details.title == null ? details.name : details.title }}
             </li>
             <li>
@@ -60,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .item {
-    flex-basis: calc(100% / 5 - 2rem);
+    flex-basis: calc(100% / 7 - 2rem);
     margin: 1rem 1rem;
     img {
         max-width: 100%;

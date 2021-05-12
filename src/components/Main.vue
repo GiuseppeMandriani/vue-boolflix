@@ -1,7 +1,13 @@
 <template>
-    <section class="top-jumbo container">
-        <Card v-for="(film, index) in movies" :key="index" :details="film" />
-    </section>
+    <div class="container">
+        <section class="top-jumbo">
+            <Card
+                v-for="(film, index) in movies"
+                :key="index"
+                :details="film"
+            />
+        </section>
+    </div>
 </template>
 
 <script>
