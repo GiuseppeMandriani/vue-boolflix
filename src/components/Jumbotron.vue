@@ -2,7 +2,15 @@
     <section class="jumbotron container ">
         <!-- Images Jumbotron -->
         <div class="images">
-            <img :src="imgDetails" alt="" />
+            <div class=" big-card img">
+                <img
+                    :src="
+                        `https://image.tmdb.org/t/p/original${imgDetails.poster_path}`
+                    "
+                    alt=""
+                />
+            </div>
+            <h2>{{ imgDetails.title }}</h2>
         </div>
     </section>
 </template>
@@ -11,7 +19,8 @@
 export default {
     name: 'Jumbotron',
     props: {
-        imgDetails: String,
+        imgDetails: Object,
+        popular: Array,
     },
 };
 </script>

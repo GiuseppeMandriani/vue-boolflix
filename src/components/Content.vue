@@ -11,6 +11,7 @@
                     v-for="(film, index) in movies"
                     :key="index"
                     :details="film"
+                    @indexFilm="setData"
                 />
             </div>
         </section>
@@ -23,6 +24,7 @@
                     v-for="serie in series"
                     :key="serie.id"
                     :details="serie"
+                    @indexFilm="setData"
                 />
             </div>
         </section>
@@ -35,7 +37,7 @@
                     v-for="popolare in popular"
                     :key="popolare.id"
                     :details="popolare"
-                    @indexFilm="setCover"
+                    @indexFilm="setData"
                 />
             </div>
         </section>
@@ -71,9 +73,9 @@ export default {
 
     methods: {
         // Functions per selezionare il film
-        setCover(cover) {
-            console.log('LOG CONTENT', cover);
-            this.$emit('setImgCover', cover);
+        setData(details) {
+            console.log('LOG CONTENT', details);
+            this.$emit('setImgData', details);
         },
     },
 };
@@ -85,7 +87,7 @@ export default {
 }
 .flex {
     display: flex;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
     overflow-x: auto;
 }
 </style>

@@ -14,7 +14,7 @@
                 :series="seriesList"
                 :popular="popularList"
                 :notFoundError="notFoundMovies && notFoundSeries"
-                @setImgCover="setImgPath"
+                @setImgData="setImgPath"
             />
         </div>
 

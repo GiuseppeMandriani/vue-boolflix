@@ -1,11 +1,20 @@
 .jumbotron {
     width: 80%;
-    height: 350px;
+    height: 400px;
+    background-color: rgba(190, 0, 0, 0.25);
     .images {
-        background-color: rgba(190, 0, 0, 0.25);
-        img {
-            width: 800px;
-            height: 350px;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+
+        .big-card.img {
+            width: 300px;
+            height: 100%;
+            img {
+                border-radius: 5px;
+                width: 100%;
+                height: 360px;
+            }
         }
     }
 }

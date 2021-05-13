@@ -2,23 +2,21 @@
     <div class="item">
         <div class="card-content">
             <img
+                class="poster"
                 v-if="details.poster_path"
-                :src="`https://image.tmdb.org/t/p/w154${details.poster_path}`"
-                :alt="`Img of ${details.name} not found`"
-                @click="
-                    $emit(
-                        'indexFilm',
-                        `https://image.tmdb.org/t/p/original${details.poster_path}`
-                    )
+                :src="
+                    `https://image.tmdb.org/t/p/original${details.poster_path}`
                 "
+                :alt="`Img of ${details.name} not found`"
             />
-            <img
-                class="img"
+            <!-- <img
+                class="poster"
                 v-else
                 src="https://www.altavod.com/assets/images/poster-placeholder.png"
                 alt=""
-            />
-            <ul class="details-list">
+            /> -->
+
+            <ul class="details-list" @click="$emit('indexFilm', details)">
                 <li v-if="details.title === details.name">
                     {{ details.title ? details.title : details.name }}
                 </li>
@@ -41,6 +39,7 @@
                 </li>
                 <li>
                     <span
+                        class="full-stars"
                         v-for="(stars, index) in Math.round(
                             details.vote_average / 2
                         )"
@@ -48,10 +47,11 @@
                     >
                         <i class="fas fa-star"></i> </span
                     ><span
+                        class="empty-stars"
                         v-for="(stars, index) in 5 -
                             Math.round(details.vote_average / 2)"
                         :key="'A' + index"
-                        ><i class="far fa-star"></i>
+                    >
                     </span>
                 </li>
             </ul>
