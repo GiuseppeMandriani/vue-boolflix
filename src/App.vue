@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <!-- HEADER -->
-        <div>
+        <div class="bg">
             <Header @performSearch="getData" />
             <!-- MAIN -->
             <Jumbotron

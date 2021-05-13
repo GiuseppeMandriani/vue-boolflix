@@ -16,7 +16,7 @@
                 alt=""
             /> -->
 
-            <ul class="details-list" @click="$emit('indexFilm', details)">
+            <ul class="details-list">
                 <li v-if="details.title === details.name">
                     {{ details.title ? details.title : details.name }}
                 </li>
@@ -51,8 +51,11 @@
                         v-for="(stars, index) in 5 -
                             Math.round(details.vote_average / 2)"
                         :key="'A' + index"
-                    >
+                        ><i class="fas fa-star"></i>
                     </span>
+                </li>
+                <li @click="$emit('indexFilm', details)" class="info">
+                    Read Info
                 </li>
             </ul>
         </div>
@@ -74,9 +77,9 @@ export default {
         isFlag(language) {
             return this.flags.includes(language);
         },
-        getStarVote(vote) {
-            Math.ceil(vote / 2);
-        },
+        // getStarVote(vote) {
+        //     Math.ceil(vote / 2);
+        // },
     },
 };
 </script>

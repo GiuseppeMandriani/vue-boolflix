@@ -32,7 +32,7 @@
         <!-- Section Popular -->
         <section v-show="popular.length">
             <h2>Popolari</h2>
-            <div class="flex">
+            <div class="flex ">
                 <Card
                     v-for="popolare in popular"
                     :key="popolare.id"
@@ -84,10 +84,17 @@ export default {
 <style scoped lang="scss">
 .top-jumbo {
     position: relative;
+    margin-top: 1rem;
 }
 .flex {
     display: flex;
     /* flex-wrap: nowrap; */
     overflow-x: auto;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #fff;
+    letter-spacing: 1px;
 }
 </style>

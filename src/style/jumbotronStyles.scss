@@ -1,20 +1,70 @@
 .jumbotron {
     width: 80%;
-    height: 400px;
-    background-color: rgba(190, 0, 0, 0.25);
+    border-radius: 10px;
+
+    background-color: rgba(0, 0, 0, 0.25);
+    .card-content {
+        position: relative;
+        img.big-img {
+            border-radius: 5px;
+            width: 100%;
+            height: 360px;
+            transition: 0.3s ease-out;
+        }
+
+        &:hover ul.details-list {
+            // display: block;
+            opacity: 1;
+            transition: opacity 0.3s ease-out;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            transform: scale(1.4);
+        }
+        &:hover img.big-img {
+            transform: scale(1.4);
+        }
+    }
+    ul.details-list {
+        font-size: 0.8rem;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        list-style: none;
+        cursor: pointer;
+    }
+
+    ul.details-list li {
+        padding-left: 5px;
+        margin-bottom: 1rem;
+        color: #fff;
+        img {
+            width: 32px;
+        }
+
+        .full-stars {
+            color: #e50914;
+        }
+        .empty-stars {
+            color: rgb(156, 156, 156);
+        }
+    }
+
     .images {
         display: flex;
         justify-content: center;
         padding: 20px;
-
-        .big-card.img {
-            width: 300px;
-            height: 100%;
-            img {
-                border-radius: 5px;
-                width: 100%;
-                height: 360px;
-            }
+        img.big-img {
+            border-radius: 5px;
+            width: 100%;
+            height: 360px;
         }
     }
 }
