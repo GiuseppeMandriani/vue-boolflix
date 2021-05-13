@@ -15,10 +15,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.notfound {
-    text-align: center;
-    img {
-        width: 200px;
-    }
-}
+@import '@/style/notfound.scss';
 </style>

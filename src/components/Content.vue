@@ -1,9 +1,12 @@
 <template>
     <div class="container top-jumbo">
+        <!-- Element Not Found -->
         <ElementNotFound v-show="notFoundError" />
-        <section v-show="movies.length" class="list">
+
+        <!-- Section Movies -->
+        <section v-show="movies.length">
             <h2>Movies</h2>
-            <div>
+            <div class="flex">
                 <Card
                     v-for="(film, index) in movies"
                     :key="index"
@@ -11,6 +14,8 @@
                 />
             </div>
         </section>
+
+        <!-- Section Series -->
         <section v-show="series.length" class="list">
             <h2>Serie Tv</h2>
             <div class="flex">
@@ -21,9 +26,11 @@
                 />
             </div>
         </section>
-        <section v-show="popular.length" class="list">
+
+        <!-- Section Popular -->
+        <section v-show="popular.length">
             <h2>Popolari</h2>
-            <div>
+            <div class="flex">
                 <Card
                     v-for="popolare in popular"
                     :key="popolare.id"
@@ -53,7 +60,6 @@ export default {
     name: 'Content',
     components: {
         Card,
-        // Loader,
         ElementNotFound,
     },
     props: {
@@ -61,12 +67,6 @@ export default {
         series: Array,
         popular: Array,
         notFoundError: Boolean,
-        loader: Boolean,
-    },
-    data() {
-        return {
-            indexFilm: 0,
-        };
     },
 
     methods: {
@@ -80,9 +80,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.top-jumbo {
+    position: relative;
+}
 .flex {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
 }
 </style>

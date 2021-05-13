@@ -60,7 +60,7 @@ export default {
             loaderPopular: false,
             indexFilm: 0,
             jumbotronImg:
-                'https://www.altavod.com/assets/images/poster-placeholder.png',
+                'https://cdn.pixabay.com/photo/2016/01/22/08/17/banner-1155437_1280.png',
         };
     },
 
