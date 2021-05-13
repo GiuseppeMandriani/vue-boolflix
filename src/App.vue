@@ -1,20 +1,24 @@
 <template>
     <div id="app">
         <!-- HEADER -->
-        <div v-if="!loading">
+        <div>
             <Header @performSearch="getData" />
             <!-- MAIN -->
-            <Jumbotron :popular="popularList" :indexImg="indexImg" />
+            <Jumbotron
+                :popular="popularList"
+                :index="indexFilm"
+                :imgDetails="jumbotronImg"
+            />
             <Content
                 :movies="filmList"
                 :series="seriesList"
                 :popular="popularList"
                 :notFoundError="notFoundMovies && notFoundSeries"
-                :loader="loaderMovies || loaderSeries || loaderPopular"
+                @setImgCover="setImgPath"
             />
         </div>
 
-        <Loader v-else label="Caricamento...">
+        <Loader label="Caricamento..." :isVisible="loaderMovies">
             <img
                 src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
                 alt="netflix-font"
@@ -54,18 +58,30 @@ export default {
             loaderMovies: false,
             loaderSeries: false,
             loaderPopular: false,
-            indexImg: 0,
+            indexFilm: 0,
+            jumbotronImg:
+                'https://www.altavod.com/assets/images/poster-placeholder.png',
         };
     },
 
     created() {
         // CALL API POPULAR
+        this.loaderMovies = true;
         setTimeout(() => {
             this.getPopular();
         }, 2000);
     },
 
     methods: {
+        setImgPath(path) {
+            this.jumbotronImg = path;
+            console.log('LOG APP', path);
+        },
+        // Functions per selezionare il film
+        setFilm(index) {
+            this.indexFilm = index;
+            console.log(index);
+        },
         getData(searchText) {
             console.log(searchText);
             if (searchText !== '') {
@@ -76,14 +92,17 @@ export default {
                 };
 
                 // Call API Movies
+                this.loaderMovies = true;
                 axios
                     .get(this.urlApi + 'movie', {
                         params: apiParams,
                     })
                     .then(res => {
-                        this.filmList = res.data.results;
-                        this.notFoundMovies = this.filmList.length === 0;
-                        this.loaderMovies = true;
+                        setTimeout(() => {
+                            this.filmList = res.data.results;
+                            this.notFoundMovies = this.filmList.length === 0;
+                            this.loaderMovies = false;
+                        }, 2000);
                     });
 
                 // Call API Series
@@ -117,8 +136,8 @@ export default {
                 .then(res => {
                     console.log(res.data.results);
                     this.popularList = res.data.results;
-                    this.loading = false;
-                    this.loaderPopular = true;
+                    this.loaderMovies = false;
+                    // this.loaderPopular = true;
                 })
                 .catch(err => {
                     console.log('Errore', err);

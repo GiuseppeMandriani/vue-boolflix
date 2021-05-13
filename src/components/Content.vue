@@ -3,8 +3,12 @@
         <ElementNotFound v-show="notFoundError" />
         <section v-show="movies.length" class="list">
             <h2>Movies</h2>
-            <div class="flex">
-                <Card v-for="film in movies" :key="film.id" :details="film" />
+            <div>
+                <Card
+                    v-for="(film, index) in movies"
+                    :key="index"
+                    :details="film"
+                />
             </div>
         </section>
         <section v-show="series.length" class="list">
@@ -19,36 +23,37 @@
         </section>
         <section v-show="popular.length" class="list">
             <h2>Popolari</h2>
-            <div class="flex">
+            <div>
                 <Card
                     v-for="popolare in popular"
                     :key="popolare.id"
                     :details="popolare"
+                    @indexFilm="setCover"
                 />
             </div>
         </section>
-        <section v-show="!loader">
-            <Loader label="Caricamento...">
+        <section>
+            <!-- <Loader label="Caricamento..." :isVisible="LoaderMovies">
                 <img
                     src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
                     alt="netflix-font"
                     border="0"
                 />
-            </Loader>
+            </Loader> -->
         </section>
     </div>
 </template>
 
 <script>
 import Card from '@/components/Card.vue';
-import Loader from '@/components/Loader.vue';
+// import Loader from '@/components/Loader.vue';
 import ElementNotFound from '@/components/ElementNotFound.vue';
 
 export default {
     name: 'Content',
     components: {
         Card,
-        Loader,
+        // Loader,
         ElementNotFound,
     },
     props: {
@@ -58,6 +63,19 @@ export default {
         notFoundError: Boolean,
         loader: Boolean,
     },
+    data() {
+        return {
+            indexFilm: 0,
+        };
+    },
+
+    methods: {
+        // Functions per selezionare il film
+        setCover(cover) {
+            console.log('LOG CONTENT', cover);
+            this.$emit('setImgCover', cover);
+        },
+    },
 };
 </script>
 
@@ -65,5 +83,6 @@ export default {
 .flex {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 </style>

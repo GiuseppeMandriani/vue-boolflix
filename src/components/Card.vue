@@ -1,9 +1,24 @@
 <template>
     <div class="item">
-        <img
-            :src="`https://image.tmdb.org/t/p/w154${details.poster_path}`"
-            :alt="`Img of ${details.name} not found`"
-        />
+        <div class="img">
+            <img
+                v-if="details.poster_path"
+                :src="`https://image.tmdb.org/t/p/w154${details.poster_path}`"
+                :alt="`Img of ${details.name} not found`"
+                @click="
+                    $emit(
+                        'indexFilm',
+                        `https://image.tmdb.org/t/p/w154${details.poster_path}`
+                    )
+                "
+            />
+            <img
+                class="img"
+                v-else
+                src="https://www.altavod.com/assets/images/poster-placeholder.png"
+                alt=""
+            />
+        </div>
         <ul class="list">
             <li v-if="details.title === details.name">
                 {{ details.title ? details.title : details.name }}
@@ -24,6 +39,17 @@
                 <span v-else>{{ details.original_language }}</span>
             </li>
             <li>
+                <!-- <i
+                    v-for="i in getStarVote(details.vote_average)"
+                    :key="`full- ${i}`"
+                    class="fas fa-star"
+                ></i>
+                <i
+                    v-for="i in 5 - getStarVote(details.vote_average)"
+                    :key="`empty- ${i}`"
+                    class="far fa-star"
+                ></i> -->
+
                 <span
                     v-for="(stars, index) in Math.round(
                         details.vote_average / 2
@@ -57,14 +83,16 @@ export default {
         isFlag(language) {
             return this.flags.includes(language);
         },
+        getStarVote(vote) {
+            Math.ceil(vote / 2);
+        },
     },
 };
 </script>
 
 <style lang="scss" scoped>
 .item {
-    flex-basis: calc(100% / 5 - 2rem);
-    margin: 1rem 1rem;
+    flex-basis: calc(100% / 5);
 }
 
 li img {

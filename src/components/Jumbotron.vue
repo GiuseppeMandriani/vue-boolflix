@@ -8,11 +8,7 @@
 
             <!-- Images Slider -->
             <div class="images">
-                <img
-                    v-for="(film, indexImg) in popular"
-                    :key="indexImg"
-                    :src="`https://image.tmdb.org/t/p/w342${film.poster_path}`"
-                />
+                <img :src="imgDetails" alt="" />
             </div>
 
             <!-- Arrow-right -->
@@ -40,22 +36,23 @@ export default {
     name: 'Jumbotron',
     props: {
         popular: Array,
-        indexImg: Number,
+        imgDetails: String,
     },
 };
 </script>
 
 <style lang="scss" scoped>
-.jumbotron {
-    width: 100%;
-    /* height: 300px; */
+.slider {
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 .images {
-    /* padding: 20px; */
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: hidden;
+    width: 100%;
+    height: 300px;
+    background: dodgerblue;
 }
+
 /* Arrows */
 .prev,
 .next {

@@ -1,5 +1,5 @@
 <template>
-    <div class="loader">
+    <div class="loader" :class="{ active: isVisible }">
         <slot></slot>
         <div class="text">{{ label }}</div>
     </div>
@@ -10,6 +10,7 @@ export default {
     name: 'Loader',
     props: {
         label: String,
+        isVisible: Boolean,
     },
 };
 </script>
@@ -17,7 +18,8 @@ export default {
 <style scoped lang="scss">
 @import '@/style/vars';
 .loader {
-    display: flex;
+    /* display: flex; */
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -27,6 +29,9 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
+    &.active {
+        display: flex;
+    }
     .text {
         text-transform: uppercase;
         color: rgba($brand-color, 0.5);
