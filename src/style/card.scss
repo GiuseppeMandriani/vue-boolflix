@@ -56,3 +56,16 @@ li.info:hover {
     cursor: pointer;
     text-decoration: underline;
 }
+
+li.info a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+li.info a:hover {
+    font-size: 2rem;
+    color: #e50914;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -9,12 +9,12 @@
                 "
                 :alt="`Img of ${details.name} not found`"
             />
-            <!-- <img
-                class="poster"
+            <img
                 v-else
+                class="poster"
                 src="https://www.altavod.com/assets/images/poster-placeholder.png"
                 alt=""
-            /> -->
+            />
 
             <ul class="details-list">
                 <li v-if="details.title === details.name">
@@ -55,7 +55,7 @@
                     </span>
                 </li>
                 <li @click="$emit('indexFilm', details)" class="info">
-                    Read Info
+                    <a href="#jumbo">Read Info</a>
                 </li>
             </ul>
         </div>

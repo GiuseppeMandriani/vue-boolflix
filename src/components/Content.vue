@@ -94,6 +94,23 @@ export default {
     /* flex-wrap: nowrap; */
     overflow-x: auto;
     overflow-y: hidden;
+    --scrollbarBG: #cfd8dc;
+    --thumbBG: #90a4ae;
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--thumbBG);
+        border: 3px solid var(--scrollbarBG);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        background: var(--scrollbarBG);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 10px;
+    }
 }
 
 h2 {
