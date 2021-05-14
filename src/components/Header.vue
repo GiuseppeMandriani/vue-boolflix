@@ -20,6 +20,7 @@
                         type="text"
                         placeholder="Search your film/Serie Tv here ..."
                         v-model.trim="searchText"
+                        ref="search"
                     />
                     <!-- Capire limite chiamate API -->
                     <button
@@ -51,6 +52,7 @@ export default {
     methods: {
         clickSearch() {
             this.iconStatus = !this.iconStatus;
+            this.$refs.search.focus();
         },
     },
 };
