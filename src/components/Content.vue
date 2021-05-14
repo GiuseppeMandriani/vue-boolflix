@@ -80,7 +80,7 @@ export default {
 
 <style scoped lang="scss">
 .top-jumbo {
-    position: relative;
+    /* position: relative; */
     margin-top: 1rem;
 }
 /* .list {
@@ -91,8 +91,8 @@ export default {
     /* flex-wrap: nowrap; */
     overflow-x: auto;
     overflow-y: hidden;
-    --scrollbarBG: #cfd8dc;
-    --thumbBG: #90a4ae;
+    --scrollbarBG: #090a0a;
+    --thumbBG: #942c06;
     scrollbar-width: thin;
     scrollbar-color: var(--thumbBG) var(--scrollbarBG);
     &::-webkit-scrollbar-thumb {
@@ -115,5 +115,6 @@ h2 {
     color: #fff;
     letter-spacing: 1px;
     margin: 1rem 0;
+    letter-spacing: 2px;
 }
 </style>

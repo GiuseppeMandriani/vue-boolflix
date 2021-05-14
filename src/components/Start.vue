@@ -1,11 +1,6 @@
 <template>
     <section class="start">
-        <a href="https://fontmeme.com/netflix-font/"
-            ><img
-                src="https://fontmeme.com/permalink/210514/2d68ea7d2d3b82494df25862b582f61f.png"
-                alt="netflix-font"
-                border="0"
-        /></a>
+        <h2>benvenuto scegli cosa guardare</h2>
     </section>
 </template>
 
@@ -16,10 +11,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/style/vars.scss';
 .start {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    h2 {
+        font-size: 4.5rem;
+        letter-spacing: 3px;
+        color: rgba($brand-color, 0.6);
+        font-weight: 400;
+    }
 }
 </style>
