@@ -1,21 +1,22 @@
 <template>
-    <section class="jumbotron container ">
+    <section class="jumbotron container   ">
         <!-- Images Jumbotron -->
-        <div class="images">
-            <img
-                :src="
-                    `https://image.tmdb.org/t/p/w1280${imgDetails.backdrop_path}`
-                "
-                alt=""
-            />
-            <div class=" card-content">
+        <div class="images ">
+            <div class=" card-content ">
                 <img
+                    class="big-img"
+                    :src="
+                        `https://image.tmdb.org/t/p/w1280${imgDetails.backdrop_path}`
+                    "
+                    alt=""
+                />
+                <!-- <img
                     class="big-img"
                     :src="
                         `https://image.tmdb.org/t/p/original${imgDetails.poster_path}`
                     "
                     alt=""
-                />
+                /> -->
                 <ul class="details-list">
                     <li v-if="imgDetails.title === imgDetails.name">
                         {{

@@ -60,7 +60,9 @@ export default {
             loaderPopular: false,
             indexFilm: 0,
             jumbotronImg:
-                'https://cdn.pixabay.com/photo/2016/01/22/08/17/banner-1155437_1280.png',
+                'https://cdn.pixabay.com/photo/2019/11/07/20/48/cinema-4609877_1280.jpg',
+
+            homePage: true,
         };
     },
 
@@ -137,7 +139,6 @@ export default {
                     console.log(res.data.results);
                     this.popularList = res.data.results;
                     this.loaderMovies = false;
-                    // this.loaderPopular = true;
                 })
                 .catch(err => {
                     console.log('Errore', err);
