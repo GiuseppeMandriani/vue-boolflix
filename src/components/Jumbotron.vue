@@ -10,13 +10,6 @@
                     "
                     alt=""
                 />
-                <!-- <img
-                    class="big-img"
-                    :src="
-                        `https://image.tmdb.org/t/p/original${imgDetails.poster_path}`
-                    "
-                    alt=""
-                /> -->
                 <ul class="details-list">
                     <li v-if="imgDetails.title === imgDetails.name">
                         {{

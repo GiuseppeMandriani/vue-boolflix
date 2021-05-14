@@ -3,10 +3,6 @@
     left: 50%;
     top: 80%;
     transform: translate(-50%, -80%);
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    background-color: #dc1a2794;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,5 +14,8 @@
         height: 200px;
         border-radius: 50%;
         border: 1px solid #000;
+    }
+    h2 {
+        color: #fff;
     }
 }

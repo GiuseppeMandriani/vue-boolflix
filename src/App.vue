@@ -59,10 +59,7 @@ export default {
             loaderSeries: false,
             loaderPopular: false,
             indexFilm: 0,
-            jumbotronImg:
-                'https://cdn.pixabay.com/photo/2019/11/07/20/48/cinema-4609877_1280.jpg',
-
-            homePage: true,
+            jumbotronImg: {},
         };
     },
 
@@ -75,9 +72,9 @@ export default {
     },
 
     methods: {
-        setImgPath(path) {
-            this.jumbotronImg = path;
-            console.log('LOG APP', path);
+        setImgPath(details) {
+            this.jumbotronImg = details;
+            console.log('LOG APP', details);
         },
         // Functions per selezionare il film
         setFilm(index) {

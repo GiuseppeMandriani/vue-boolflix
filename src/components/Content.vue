@@ -4,7 +4,7 @@
         <ElementNotFound v-show="notFoundError" />
 
         <!-- Section Movies -->
-        <section v-show="movies.length">
+        <section v-show="movies.length" class="list">
             <h2>Movies</h2>
             <div class="flex">
                 <Card
@@ -30,7 +30,7 @@
         </section>
 
         <!-- Section Popular -->
-        <section v-show="popular.length">
+        <section v-show="popular.length" class="list">
             <h2>Popolari</h2>
             <div class="flex ">
                 <Card
@@ -86,6 +86,9 @@ export default {
     position: relative;
     margin-top: 1rem;
 }
+/* .list {
+    margin-bottom: 1rem;
+} */
 .flex {
     display: flex;
     /* flex-wrap: nowrap; */
@@ -97,5 +100,6 @@ h2 {
     font-size: 2rem;
     color: #fff;
     letter-spacing: 1px;
+    margin: 1rem 0;
 }
 </style>

@@ -5,6 +5,7 @@
             :src="require(`@/assets/404.gif`)"
             alt="not found"
         />
+        <h2>Nessun Risultato</h2>
     </section>
 </template>
 
