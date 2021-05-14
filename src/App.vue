@@ -15,6 +15,7 @@
                 :popular="popularList"
                 :notFoundError="notFoundMovies && notFoundSeries"
                 @setImgData="setImgPath"
+                :imgDefault="startImg"
             />
         </div>
 
@@ -60,12 +61,15 @@ export default {
             loaderPopular: false,
             indexFilm: 0,
             jumbotronImg: {},
+            startImg: true,
         };
     },
 
     created() {
         // CALL API POPULAR
         this.loaderMovies = true;
+        this.startImg = true;
+
         setTimeout(() => {
             this.getPopular();
         }, 2000);
@@ -101,6 +105,7 @@ export default {
                             this.filmList = res.data.results;
                             this.notFoundMovies = this.filmList.length === 0;
                             this.loaderMovies = false;
+                            this.startImg = false;
                         }, 2000);
                     });
 
@@ -113,6 +118,7 @@ export default {
                         this.seriesList = res.data.results;
                         this.notFoundSeries = this.seriesList.length === 0;
                         this.loaderSeries = true;
+                        this.startImg = false;
                     });
             } else {
                 this.filmList = [];
@@ -136,6 +142,7 @@ export default {
                     console.log(res.data.results);
                     this.popularList = res.data.results;
                     this.loaderMovies = false;
+                    this.startImg = true;
                 })
                 .catch(err => {
                     console.log('Errore', err);

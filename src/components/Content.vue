@@ -29,6 +29,9 @@
             </div>
         </section>
 
+        <!-- Start -->
+        <Start v-show="imgDefault" />
+
         <!-- Section Popular -->
         <section v-show="popular.length" class="list">
             <h2>Popolari</h2>
@@ -41,34 +44,28 @@
                 />
             </div>
         </section>
-        <section>
-            <!-- <Loader label="Caricamento..." :isVisible="LoaderMovies">
-                <img
-                    src="https://fontmeme.com/permalink/210512/aeb2e32c106986dd5cd098b29b231779.png"
-                    alt="netflix-font"
-                    border="0"
-                />
-            </Loader> -->
-        </section>
     </div>
 </template>
 
 <script>
 import Card from '@/components/Card.vue';
-// import Loader from '@/components/Loader.vue';
+
 import ElementNotFound from '@/components/ElementNotFound.vue';
+import Start from '@/components/Start.vue';
 
 export default {
     name: 'Content',
     components: {
         Card,
         ElementNotFound,
+        Start,
     },
     props: {
         movies: Array,
         series: Array,
         popular: Array,
         notFoundError: Boolean,
+        imgDefault: Boolean,
     },
 
     methods: {
