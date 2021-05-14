@@ -80,11 +80,7 @@ export default {
             this.jumbotronImg = details;
             console.log('LOG APP', details);
         },
-        // Functions per selezionare il film
-        setFilm(index) {
-            this.indexFilm = index;
-            console.log(index);
-        },
+
         getData(searchText) {
             console.log(searchText);
             if (searchText !== '') {

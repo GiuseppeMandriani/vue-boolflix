@@ -117,4 +117,10 @@ h2 {
     margin: 1rem 0;
     letter-spacing: 2px;
 }
+
+@media screen and (max-width: 1024px) {
+    .flex {
+        flex-wrap: wrap;
+    }
+}
 </style>

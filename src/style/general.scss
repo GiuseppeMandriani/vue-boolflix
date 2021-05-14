@@ -36,3 +36,9 @@ body {
         rgba(0, 0, 0, 0.8) 800px
     );
 }
+
+@media screen and (max-width: 1024px) {
+    body {
+        font-size: 12px;
+    }
+}

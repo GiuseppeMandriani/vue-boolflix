@@ -68,3 +68,9 @@ li.info a:hover {
     cursor: pointer;
     text-decoration: underline;
 }
+
+@media screen and (max-width: 1024px) {
+    .card-content {
+        flex-basis: 150px;
+    }
+}
