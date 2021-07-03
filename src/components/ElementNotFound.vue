@@ -16,5 +16,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/style/notfound.scss';
+@import '../style/notFound.scss';
+/* @import '@/style/notFound.scss'; // Arch mi da problemi */
 </style>
